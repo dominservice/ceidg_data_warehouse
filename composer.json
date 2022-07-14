@@ -13,10 +13,7 @@
         }
     ],
     "require": {
-        "php": ">=7.1.3",
-        "ext-intl": "*",
-        "ext-mbstring": "*",
-        "laravel/framework": "^5.6|^5.7|^5.8|^6|^7|^8|^9"
+        "ext-curl": "*"
     },
     "require-all": true,
     "autoload": {
