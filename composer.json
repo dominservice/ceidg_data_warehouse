@@ -1,0 +1,31 @@
+{
+    "name": "dominservice/ceidg_data_warehouse",
+    "type": "library",
+    "description": "This library allows you to integrate the \"CEIDG data warehouse\" with your system written in PHP\n",
+    "keywords": ["php", "ceidg", "biznes.gov.pl", "api"],
+    "homepage": "https://github.com/dominservice/ceidg_data_warehouse",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "dominservice",
+            "email": "biuro@dso.biz.pl",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.1.3",
+        "ext-intl": "*",
+        "ext-mbstring": "*",
+        "laravel/framework": "^5.6|^5.7|^5.8|^6|^7|^8|^9"
+    },
+    "require-all": true,
+    "autoload": {
+        "psr-4": {
+            "Dominservice\\DataLocaleParser\\": "src/"
+        },
+        "files": [
+            "src/Helpers/helpers.php"
+        ]
+    },
+    "minimum-stability": "dev"
+}
