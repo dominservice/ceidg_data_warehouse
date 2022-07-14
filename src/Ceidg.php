@@ -276,9 +276,6 @@ class Ceidg
                     $tmp = clone $item;
                     unset($tmp->id, $tmp->link);
 
-
-//                    dd($item, $tmp);
-
                     if ($this->getFullCompanyData) {
                         $ids[] = $item->id;
                     }
@@ -429,7 +426,12 @@ class Ceidg
 
     public function setPKD($pkd)
     {
-        $this->setCriteria('pkd', $pkd);
+        if (!is_array($pkd)) {
+            $pkd = [$pkd];
+        }
+        foreach ($pkd as $item) {
+            $this->setCriteria('pkd', $item);
+        }
     }
 
     public function setPage($page)

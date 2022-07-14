@@ -12,3 +12,43 @@ Please refer to the official CEDIG data warehouse API documentation at [(https:/
 As simple as it can be:
 ```bash
 composer require dominservice/ceidg_data_warehouse
+```
+
+## Usage
+
+```php
+use Dominservice\CeidgDataWarehouse\Ceidg;
+
+$ceidgApi = new Ceidg('[your_token]');
+```
+token you make get from [https://www.biznes.gov.pl/pl/e-uslugi/00_9999_00](https://www.biznes.gov.pl/pl/e-uslugi/00_9999_00)
+
+```php
+/** criteria make by array or strung key */
+$ceidgApi->setCriteria($criteria, $value = null)
+/** or shortly */
+$ceidgApi->setDateFrom('YYY-MM-DD');
+$ceidgApi->setDateTo('YYY-MM-DD');
+$ceidgApi->setNIP('0000000000');
+$ceidgApi->setNIP_SC('0000000000');
+$ceidgApi->setREGON('000000000');
+$ceidgApi->setREGON_SC('000000000');
+$ceidgApi->setFirstname('Marian');
+$ceidgApi->setLastname('Paździch');
+$ceidgApi->setName('Paźdzochmania S.A.');
+$ceidgApi->setStreet('Ćwiartki');
+$ceidgApi->setBuilding('4');
+$ceidgApi->setFlat('5');
+$ceidgApi->setCity('Wrocław');
+$ceidgApi->setVoivodship('Dolnośląskie');
+$ceidgApi->setDistrict('Wrocławski');
+$ceidgApi->setCommune('Wrocław');
+$ceidgApi->setPostcode('00-000');
+$ceidgApi->setPKD(['[pkd_list_in_array]']);
+$ceidgApi->setStatus($status);
+
+$ceidgApi->getCompanies($getAll = false, $getFullCompanyData = false)
+
+$ceidgApi->clearCriteria();
+
+```
