@@ -1,3 +1,7 @@
+[![Latest Version](https://img.shields.io/github/release/dominservice/ceidg_data_warehouse.svg?style=flat-square)](https://github.com/dominservice/ceidg_data_warehouse/releases)
+[![Total Downloads](https://img.shields.io/packagist/dt/dominservice/ceidg_data_warehouse.svg?style=flat-square)](https://packagist.org/packages/dominservice/ceidg_data_warehouse)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
+
 # PHP CEIDG data warehouse library
 
 This library allows you to integrate the "CEIDG data warehouse" with your system written in PHP
