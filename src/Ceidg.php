@@ -336,7 +336,6 @@ class Ceidg
                 $this->parseCompanyList();
             }
         }
-        dump($this->lastResponse);
     }
 
     public function setDateFrom($date)
