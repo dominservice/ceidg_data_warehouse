@@ -131,6 +131,8 @@ class Ceidg
      */
     private function curl($params = [], $url = false)
     {
+        $this->lastContentResponse = null;
+
         if (!$this->firstRequestTime) {
             $this->firstRequestTime = time();
         }
@@ -156,7 +158,9 @@ class Ceidg
         }
 
         if ($this->bigCountRequests > $this->limitBigCount || $this->smallCountRequests > $this->limitSmallCount) {
-            return null;
+            sleep(60);
+
+            return $this->curl($params, $url);
         }
 
         if (!$url) {
@@ -187,6 +191,7 @@ class Ceidg
         $content = trim(curl_exec($ch));
         curl_close($ch);
 
+        $this->lastContentResponse = $content;
         return json_decode($content);
     }
 
@@ -265,7 +270,6 @@ class Ceidg
         return $this->companyList;
     }
 
-
     public function parseCompanyList()
     {
         if ($this->lastResponse) {
@@ -289,6 +293,12 @@ class Ceidg
                             'method' => 'firma',
                             'ids' => $chunk
                         ]);
+
+//                        if (empty($data->firma)) {
+//                            dd($data, 'test', $chunk, $this->lastContentResponse);
+//                        }
+
+
 
                         foreach ($data->firma as $item) {
                             $this->companyList[$item->id]->adresDzialalnosci = !empty($item->adresDzialalnosci) ? $item->adresDzialalnosci : null;
