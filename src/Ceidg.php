@@ -112,6 +112,8 @@ class Ceidg
 
     private $companyList = [];
 
+    private $countRequest = 0;
+
     /**
      * Class constructor.
      *
@@ -131,6 +133,7 @@ class Ceidg
      */
     private function curl($params = [], $url = false)
     {
+        $urlRequest = $url;
         $this->lastContentResponse = null;
 
         if (!$this->firstRequestTime) {
@@ -163,26 +166,26 @@ class Ceidg
             return $this->curl($params, $url);
         }
 
-        if (!$url) {
-            $url = $this->apiUrl;
+        if (!$urlRequest) {
+            $urlRequest = $this->apiUrl;
         }
 
         if (!empty($params['method'])) {
-            $url .= '/' . $params['method'];
+            $urlRequest .= '/' . $params['method'];
             unset($params['method']);
-        } else {
-            $url .= '/firmy';
+        } elseif (!preg_match('#firm#', $urlRequest)) {
+            $urlRequest .= '/firmy';
         }
 
         $query = !empty($params) ? http_build_query($params) : null;
 
         if ($query) {
-            $url .= '?' . $query;
+            $urlRequest .= '?' . $query;
         }
 
         $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_URL, $urlRequest);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_TIMEOUT, 20);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
@@ -192,6 +195,7 @@ class Ceidg
         curl_close($ch);
 
         $this->lastContentResponse = $content;
+        $this->countRequest++;
         return json_decode($content);
     }
 
@@ -293,12 +297,6 @@ class Ceidg
                             'method' => 'firma',
                             'ids' => $chunk
                         ]);
-
-//                        if (empty($data->firma)) {
-//                            dd($data, 'test', $chunk, $this->lastContentResponse);
-//                        }
-
-
 
                         foreach ($data->firma as $item) {
                             $this->companyList[$item->id]->adresDzialalnosci = !empty($item->adresDzialalnosci) ? $item->adresDzialalnosci : null;
